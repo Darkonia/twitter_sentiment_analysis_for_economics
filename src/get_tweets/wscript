@@ -1,0 +1,13 @@
+#! python
+
+
+def build(ctx):
+
+    # Illustrate simple use of run_py_script
+    ctx(
+        features="run_py_script",
+        source="get_tweets.py",
+        deps=ctx.path_to(ctx, "CREDENTIALS", f"credentials.pickle"),
+        target=ctx.path_to(ctx, "OUT_DATA", "tweets.csv"),
+        name="get_tweets",
+    )
