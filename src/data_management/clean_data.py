@@ -53,13 +53,17 @@ def clean_text(text):
     text = re.sub(r"\+", " plus ", text)
     text = re.sub(r"\-", " minus ", text)
     text = re.sub(r"\=", " equal ", text)
+    text = re.sub(r":", " ", text)
     text = re.sub(r"'", " ", text)
     text = re.sub(r"(\d+)(k)", r"\g<1>000", text)  #
-    text = re.sub(r":", " : ", text)
     text = re.sub(r" e g ", " eg ", text)  #
     text = re.sub(r"\s{2,}", " ", text)
     text = re.sub(r"http.*", " ", text)
     text = re.sub(r"[^A-Za-z0-9^,!.\/'+-=]", " ", text)
+    text = re.sub(r"(?<!\S)\d(?![^\s.,?!])", " ", text)
+    text = re.sub(r"(?<!\S)\d\d(?![^\s.,?!])", " ", text)
+    text = re.sub(r"(?<!\S)\d\d\d(?![^\s.,?!])", " ", text)
+
     # remove stopwords
 
     text = text.split()
@@ -111,12 +115,13 @@ def stem(text):
 if __name__ == "__main__":
 
     # load saved tweets from get_tweets.py
-    data = pickle.load(open(ppj("TWEETS", "tweets.pickle"), "rb"))
+    data = pickle.load(open(ppj("OUT_DATA", "tweets.pickle"), "rb"))
 
     # extract only text from tweets
     tweet_texts = []
     for tweet in data:
         tweet_texts.append(tweet["full_text"])
     data = normalise_text(tweet_texts)
+
     with open(ppj("OUT_DATA", "normalised_tweets.pickle"), "wb") as out_file:
         pickle.dump(data, out_file)
