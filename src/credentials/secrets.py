@@ -44,6 +44,7 @@ def decrypt_credentials(cred):
     try:
         for c in cred.keys():
             cred[c] = cipher_suite.decrypt(cred[c]).decode()
+        print("Credentials decrypted succesfully!")
     except Exception:
         print(
             "Invalid password. Please try again or update secrets.py with your own credentials."
@@ -60,3 +61,4 @@ if __name__ == "__main__":
 
     with open(ppj("CREDENTIALS", "credentials.pickle"), "wb") as out_file:
         pickle.dump(credentials, out_file)
+    print("asdf    " + ppj("CREDENTIALS", "credentials.pickle"))

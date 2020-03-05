@@ -13,9 +13,12 @@ def set_project_paths(ctx):
     pp = OrderedDict()
     pp["PROJECT_ROOT"] = "."
     pp["IN_DATA"] = "src/original_data/"
+    pp["IN_DATA_MANAGEMENT"] = "src/data_management/"
     pp["IN_MODEL_CODE"] = "src/model_code"
     pp["IN_MODEL_SPECS"] = "src/model_specs"
     pp["LIBRARY"] = "src/library"
+    pp["CREDENTIALS"] = f"{out}/credentials"
+    pp["TWEETS"] = "bld/get_tweets"
     pp["BLD"] = ""
     pp["OUT_DATA"] = f"{out}/out/data"
     pp["OUT_ANALYSIS"] = f"{out}/out/analysis"
@@ -34,7 +37,6 @@ def set_project_paths(ctx):
             for adokey, adoval in val.items():
                 pp[key][adokey] = ctx.path.make_node(adoval)
     return pp
-
 
 def path_to(ctx, pp_key, *args):
     """Return the relative path to os.path.join(*args*) in the directory

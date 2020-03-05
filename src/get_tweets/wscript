@@ -7,7 +7,7 @@ def build(ctx):
     ctx(
         features="run_py_script",
         source="get_tweets.py",
-        deps=ctx.path_to(ctx, "CREDENTIALS", f"credentials.pickle"),
-        target=ctx.path_to(ctx, "OUT_DATA", "tweets.csv"),
+        deps=ctx.path_to(ctx, "CREDENTIALS", "credentials.pickle"),
+        target=ctx.path_to(ctx, "OUT_DATA", "tweets.pickle"),
         name="get_tweets",
     )
