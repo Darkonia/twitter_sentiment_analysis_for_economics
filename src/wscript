@@ -6,10 +6,11 @@ def build(ctx):
     ctx.recurse("get_tweets")
     ctx.recurse("test")
     ctx.recurse("data_management")
-
+    ctx.recurse("sentiment_analysis")
     #ctx.recurse("final")
 
     # Safety measure -- else the LaTeX scanner might fail because some
     # '.tex'-source file has not been generated.
     ctx.add_group()
     #ctx.recurse("paper")
+    ctx.recurse("documentation")

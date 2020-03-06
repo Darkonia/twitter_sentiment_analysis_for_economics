@@ -1,0 +1,13 @@
+#! python
+
+
+def build(ctx):
+
+    # Illustrate simple use of run_py_script
+    ctx(
+        features="run_py_script",
+        source="sentiment_model.py",
+        deps=ctx.path_to(ctx, "IN_DATA_MANAGEMENT", "normalised_tweets.pickle"),
+        target=ctx.path_to(ctx, "OUT_DATA", "data_weighted_coeff.pickle"),
+        name="create_sentiment_coefficients",
+    )

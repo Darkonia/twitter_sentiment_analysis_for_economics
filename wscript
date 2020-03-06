@@ -68,6 +68,7 @@ def configure(ctx):
     # Vector graphics output in batch mode.
     ctx.env.PDFLATEXFLAGS = ["-halt-on-error"]
     ctx.load("run_py_script")
+    ctx.load("sphinx_build")
     ctx.load("write_project_headers")
     # ctx.find_program("dot")
     ctx.load("biber")
