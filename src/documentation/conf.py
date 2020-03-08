@@ -44,7 +44,7 @@ source_encoding = "utf-8"
 master_doc = "index"
 
 # General information about the project.
-project = "Example"
+project = "Twitter Sentiment Analysis for Economics"
 copyright = "2019-, Joaquin Felber"
 
 # The version info for the project you"re documenting, acts as replacement for
@@ -191,7 +191,7 @@ latex_documents = [
     (
         "index",
         "project_documentation.tex",
-        """Documentation of the Example
+        """Documentation of the Twitter Sentiment Analysis for Economics
         project""",
         "Joaquin Felber",
         "manual",

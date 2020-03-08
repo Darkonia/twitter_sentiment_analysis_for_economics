@@ -1,14 +1,14 @@
 .. _analysis:
 
 ************************************
-Main model estimations / simulations
+Analysis of the computed Sentiment
 ************************************
 
-Documentation of the code in *src.analysis*. This is the core of the project.
+Documentation of the code in *src.analysis*. Match sentiment coefficient with variables of interest. Perform standard OLS.
 
 
-Schelling example
-=================
+Matching and Statistical Analysis
+=================================
 
-.. automodule:: src.analysis.schelling
+.. automodule:: src.analysis.analysis
     :members:

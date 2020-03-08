@@ -7,6 +7,9 @@ Original data
 
 Documentation of the different datasets in *original_data*.
 
-In the original data section you would store the raw data, which you should not manipulate to ensure reproducibility.
+U.S. / Euro Foreign Exchange Rate (DEXUSEU) https://fred.stlouisfed.org/series/DEXUSEU
+Unemployment Rate (UNRATE)  https://fred.stlouisfed.org/series/UNRATE
+Consumer Price Index for All Urban Consumers: All Items in U.S. City Average (CPIAUCSL) https://fred.stlouisfed.org/series/CPIAUCSL
+Real Gross Domestic Product (A191RL1Q225SBEA) https://fred.stlouisfed.org/series/A191RL1Q225SBEA
 
-If you want to include multiple data sets, you can also create subfolders for the sake of a clear structure.
+All data sets in a quarter frequency aggregated by average.

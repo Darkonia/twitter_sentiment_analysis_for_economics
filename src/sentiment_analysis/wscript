@@ -7,7 +7,10 @@ def build(ctx):
     ctx(
         features="run_py_script",
         source="sentiment_model.py",
-        deps=ctx.path_to(ctx, "IN_DATA_MANAGEMENT", "normalised_tweets.pickle"),
-        target=ctx.path_to(ctx, "OUT_DATA", "data_weighted_coeff.pickle"),
+        deps=ctx.path_to(ctx, "OUT_DATA", "normalised_tweets.pickle"),
+        target=[ctx.path_to(ctx, "OUT_DATA", "data_weighted_coeff.pickle"),
+            ctx.path_to(ctx, "OUT_ANALYSIS", "clusters_report.txt")],
         name="create_sentiment_coefficients",
     )
+a = 'asdf'
+a*8

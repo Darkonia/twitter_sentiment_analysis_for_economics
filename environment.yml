@@ -5,15 +5,23 @@ dependencies:
   - _tflow_select=2.3.0=mkl
   - absl-py=0.9.0=py37_0
   - appnope=0.1.0=py37_0
+  - asn1crypto=1.3.0=py37_0
   - astor=0.8.0=py37_0
   - attrs=19.3.0=py_0
   - backcall=0.1.0=py37_0
   - blas=1.0=mkl
   - bleach=3.1.0=py37_0
+  - boto=2.49.0=py37_0
+  - boto3=1.12.12=py_0
+  - botocore=1.15.12=py_0
+  - bz2file=0.98=py37_1
   - c-ares=1.15.0=h1de35cc_1001
   - ca-certificates=2020.1.1=0
   - cairo=1.14.12=hc4e6be7_4
   - certifi=2019.11.28=py37_0
+  - cffi=1.14.0=py37hb5b8e2f_0
+  - chardet=3.0.4=py37_1003
+  - cryptography=2.8=py37ha12b0ac_0
   - decorator=4.4.1=py_0
   - defusedxml=0.6.0=py_0
   - entrypoints=0.3=py37_0
@@ -22,6 +30,7 @@ dependencies:
   - freetype=2.9.1=hb4e5f40_0
   - fribidi=1.0.5=h1de35cc_0
   - gast=0.2.2=py37_0
+  - gensim=3.8.0=py37h6440ff4_0
   - gettext=0.19.8.1=h15daf44_3
   - glib=2.63.1=hd977a24_0
   - google-pasta=0.1.8=py_0
@@ -39,6 +48,7 @@ dependencies:
   - ipython_genutils=0.2.0=py37_0
   - jedi=0.16.0=py37_0
   - jinja2=2.11.1=py_0
+  - jmespath=0.9.4=py_0
   - jpeg=9b=he5867d9_2
   - json5=0.9.1=py_0
   - jsonschema=3.2.0=py37_0
@@ -48,6 +58,7 @@ dependencies:
   - jupyterlab_server=1.0.6=py_0
   - keras-applications=1.0.8=py_0
   - keras-preprocessing=1.1.0=py_1
+  - kiwisolver=1.1.0=py37h0a44026_0
   - libcxx=4.0.1=hcfea43d_1
   - libcxxabi=4.0.1=hcfea43d_1
   - libedit=3.1.20181209=hb402a30_0
@@ -61,6 +72,7 @@ dependencies:
   - libxml2=2.9.9=hf6e021a_1
   - markdown=3.1.1=py37_0
   - markupsafe=1.1.1=py37h1de35cc_0
+  - matplotlib-base=3.1.3=py37h9aa3819_0
   - mistune=0.8.4=py37h1de35cc_0
   - mkl=2019.4=233
   - mkl-service=2.3.0=py37hfbe908c_0
@@ -70,6 +82,7 @@ dependencies:
   - nbconvert=5.6.1=py37_0
   - nbformat=5.0.4=py_0
   - ncurses=6.2=h0a44026_0
+  - nltk=3.4.5=py37_0
   - notebook=6.0.3=py37_0
   - numpy=1.18.1=py37h7241aed_0
   - numpy-base=1.18.1=py37h6575580_1
@@ -80,6 +93,7 @@ dependencies:
   - pandocfilters=1.4.2=py37_1
   - pango=1.42.4=h060686c_0
   - parso=0.6.1=py_0
+  - patsy=0.5.1=py37_0
   - pcre=8.43=h0a44026_0
   - pexpect=4.8.0=py37_0
   - pickleshare=0.7.5=py37_0
@@ -89,19 +103,27 @@ dependencies:
   - prompt_toolkit=3.0.3=py_0
   - protobuf=3.11.4=py37h0a44026_0
   - ptyprocess=0.6.0=py37_0
+  - pycparser=2.19=py37_0
   - pygments=2.5.2=py_0
+  - pyopenssl=19.1.0=py37_0
+  - pyparsing=2.4.6=py_0
   - pyrsistent=0.15.7=py37h1de35cc_0
+  - pysocks=1.7.1=py37_0
   - python=3.7.6=h359304d_2
   - python-dateutil=2.8.1=py_0
   - python-graphviz=0.8.4=py37_1
   - pytz=2019.3=py_0
   - pyzmq=18.1.1=py37h0a44026_0
   - readline=7.0=h1de35cc_5
+  - s3transfer=0.3.3=py37_0
   - scipy=1.4.1=py37h9fa6033_0
+  - seaborn=0.10.0=py_0
   - send2trash=1.5.0=py37_0
   - setuptools=45.2.0=py37_0
   - six=1.14.0=py37_0
+  - smart_open=1.9.0=py_0
   - sqlite=3.31.1=ha441bb4_0
+  - statsmodels=0.11.0=py37h1de35cc_0
   - tensorboard=2.0.0=pyhb38c66f_1
   - tensorflow=2.0.0=mkl_py37hda344b4_0
   - tensorflow-base=2.0.0=mkl_py37h66b1bf0_0
@@ -112,6 +134,7 @@ dependencies:
   - tk=8.6.8=ha441bb4_0
   - tornado=6.0.3=py37h1de35cc_3
   - traitlets=4.3.3=py37_0
+  - urllib3=1.25.8=py37_0
   - wcwidth=0.1.8=py_0
   - webencodings=0.5.1=py37_1
   - werkzeug=1.0.0=py_0
@@ -122,15 +145,14 @@ dependencies:
   - zipp=2.2.0=py_0
   - zlib=1.2.11=h1de35cc_3
   - zstd=1.3.7=h5bba6e5_0
-  - graphviz=2.40.1=hefbbd9a_2
   - pip:
     - alabaster==0.7.12
     - appdirs==1.4.3
+    - argh==0.26.2
     - aspy-yaml==1.3.0
     - atomicwrites==1.3.0
     - babel==2.8.0
     - cfgv==3.1.0
-    - chardet==3.0.4
     - click==7.0
     - coverage==5.0.3
     - cycler==0.10.0
@@ -140,27 +162,37 @@ dependencies:
     - identify==1.4.11
     - idna==2.9
     - imagesize==1.2.0
-    - kiwisolver==1.1.0
+    - joblib==0.14.1
+    - latexcodec==2.0.0
+    - livereload==2.6.1
     - matplotlib==3.1.1
     - more-itertools==8.2.0
     - nbsphinx==0.4.2
     - nodeenv==1.3.5
     - oauthlib==3.1.0
+    - oset==0.1.3
     - packaging==20.1
+    - pathtools==0.1.2
     - pluggy==0.13.1
+    - port-for==0.3.1
     - pre-commit==1.18.3
     - py==1.8.1
-    - pyparsing==2.4.6
-    - pysocks==1.7.1
+    - pybtex==0.22.2
+    - pybtex-docutils==0.2.2
     - pytest==5.2.0
     - pytest-cov==2.7.1
     - pytest-pythonpath==0.7.3
     - pyyaml==5.3
     - requests==2.23.0
     - requests-oauthlib==1.3.0
+    - scikit-learn==0.22.2.post1
+    - sklearn==0.0
     - snowballstemmer==2.0.0
     - sphinx==2.4.3
+    - sphinx-autobuild==0.7.1
+    - sphinx-rtd-theme==0.4.3
     - sphinxcontrib-applehelp==1.0.2
+    - sphinxcontrib-bibtex==1.0.0
     - sphinxcontrib-devhelp==1.0.2
     - sphinxcontrib-htmlhelp==1.0.3
     - sphinxcontrib-jsmath==1.0.1
@@ -168,6 +200,8 @@ dependencies:
     - sphinxcontrib-serializinghtml==1.1.4
     - toml==0.10.0
     - tweepy==3.8.0
-    - urllib3==1.25.8
+    - twitterapi==2.5.10
     - virtualenv==20.0.7
+    - watchdog==0.10.2
 prefix: /Applications/anaconda3/envs/twitter_sentiment_analysis_for_economics
+

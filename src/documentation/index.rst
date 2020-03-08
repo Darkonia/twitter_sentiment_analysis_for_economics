@@ -16,7 +16,5 @@ Welcome to the Example project's documentation!
     analysis
     final
     paper
-    model_code
-    model_specs
-    library
+
     references

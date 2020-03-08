@@ -1,3 +1,4 @@
+import calendar
 import pickle
 import re
 
@@ -10,23 +11,18 @@ from nltk.stem.wordnet import WordNetLemmatizer
 from bld.project_paths import project_paths_join as ppj
 
 
-def normalise_text(text_list, stopwords="true", lemmatise="true", stemming="false"):
+def normalise_text(text, stopwords="true", lemmatise="true", stemming="false"):
 
-    normalised_tweets = []
+    normalised_row = clean_text(text)
 
-    for text in tweet_texts:
-        normalised_row = clean_text(text)
+    if stopwords == "true":
+        normalised_row = remove_stopwords(normalised_row)
+    if lemmatise == "true":
+        normalised_row = lemmatize(normalised_row)
+    if stemming == "true":
+        normalised_row = stem(normalised_row)
 
-        if stopwords == "true":
-            normalised_row = remove_stopwords(normalised_row)
-        if lemmatise == "true":
-            normalised_row = lemmatize(normalised_row)
-        if stemming == "true":
-            normalised_row = stem(normalised_row)
-
-        normalised_tweets.append(normalised_row)
-
-    return normalised_tweets
+    return normalised_row
 
 
 def clean_text(text):
@@ -112,16 +108,54 @@ def stem(text):
     return stemd_text
 
 
+# define periods to group tweets by date, in this case quarters
+month_to_num = {v: "0" + str(k) for k, v in enumerate(calendar.month_abbr)}
+month_to_num["Oct"] = 10
+month_to_num["Nov"] = 11
+month_to_num["Dec"] = 12
+
+
+def reformat_date(tweet):
+    date_list = tweet["created_at"].split()
+    tweet["created_at"] = date_list[-1] + str(month_to_num[date_list[1]]) + date_list[2]
+    return tweet["created_at"]
+
+
+def identify_quarter(date):
+    day = int(date[4:])
+    qu = ""
+    if day < 401:
+        qu = "Q1"
+    elif day < 701:
+        qu = "Q2"
+    elif day < 1001:
+        qu = "Q3"
+    elif day < 1301:
+        qu = "Q4"
+    return qu
+
+
+def assign_quarter(tweet):
+    date = reformat_date(tweet)
+    qu = identify_quarter(date)
+    tweet["quarter"] = date[:4] + qu
+    return tweet["quarter"]
+
+
 if __name__ == "__main__":
 
     # load saved tweets from get_tweets.py
     data = pickle.load(open(ppj("OUT_DATA", "tweets.pickle"), "rb"))
 
-    # extract only text from tweets
-    tweet_texts = []
+    # creates dictionary by ordering tweets by quarter and save normalised text
+    tweets_by_period = {}
     for tweet in data:
-        tweet_texts.append(tweet["full_text"])
-    data = normalise_text(tweet_texts)
+        assign_quarter(tweet)
+        text = normalise_text(tweet["text"])
+        try:
+            tweets_by_period[tweet["quarter"]].append(text)
+        except KeyError:
+            tweets_by_period[tweet["quarter"]] = [text]
 
     with open(ppj("OUT_DATA", "normalised_tweets.pickle"), "wb") as out_file:
-        pickle.dump(data, out_file)
+        pickle.dump(tweets_by_period, out_file)

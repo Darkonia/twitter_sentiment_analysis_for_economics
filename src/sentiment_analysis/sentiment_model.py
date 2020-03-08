@@ -75,13 +75,36 @@ def compute_weighted_coeff(data_scores, data_weights):
     return data_weighted_coeff
 
 
+def clusters_report(cluster_centers):
+    """Returns the 10 closest words to each cluster center.
+    Useful to interpret what does each cluster represents.
+    """
+    cluster0 = word_vectors.similar_by_vector(
+        cluster_centers[0], topn=10, restrict_vocab=None
+    )
+    cluster1 = word_vectors.similar_by_vector(
+        cluster_centers[1], topn=10, restrict_vocab=None
+    )
+    with open(ppj("OUT_ANALYSIS", "clusters_report.txt"), "w") as output:
+        output.write("Cluster 0 \n:")
+        output.write(str(cluster0))
+        output.write("\n Cluster 1 \n:")
+        output.write(str(cluster1))
+
+
 if __name__ == "__main__":
 
     # load normalised tweets
     data = pickle.load(open(ppj("OUT_DATA", "normalised_tweets.pickle"), "rb"))
 
+    # unpack periods to tweet_pool
+    tweet_pool = []
+    period_lens = []
+    for period in data:
+        period_lens.append(len(data[period]))
+        tweet_pool.extend(data[period])
     # Create CBOW model
-    model = Word2Vec(data, min_count=2, size=300, window=4)
+    model = Word2Vec(tweet_pool, min_count=2, size=300, window=4)
 
     word_vectors = model.wv
 
@@ -89,17 +112,9 @@ if __name__ == "__main__":
     model = KMeans(n_clusters=2, max_iter=1000, random_state=True, n_init=50).fit(
         X=word_vectors.vectors
     )
-    positive_cluster_center = model.cluster_centers_[0]
-    negative_cluster_center = model.cluster_centers_[1]
 
     # dentify meaning of the cluster
-    word_vectors.similar_by_vector(
-        model.cluster_centers_[0], topn=10, restrict_vocab=None
-    )
-
-    word_vectors.similar_by_vector(
-        model.cluster_centers_[1], topn=10, restrict_vocab=None
-    )
+    clusters_report(model.cluster_centers_)
 
     # summarise CBOW model
     words = pd.DataFrame(word_vectors.vocab.keys())
@@ -116,7 +131,7 @@ if __name__ == "__main__":
     # prepare tweets for tfidf
     tfidf_data = []
 
-    for tweet in data:
+    for tweet in tweet_pool:
         t_as_string = ""
         for word in tweet:
             t_as_string += word + " "
@@ -132,40 +147,15 @@ if __name__ == "__main__":
     # dict word to sentiment_coeff
     sentiment_dict = dict(zip(words["words"], words["sentiment_coeff"]))
 
-    data_scores = get_sentiment_coeff(data, sentiment_dict)
-    data_weights = get_tfidf_weights(data, tfidf)
+    data_scores = get_sentiment_coeff(tweet_pool, sentiment_dict)
+    data_weights = get_tfidf_weights(tweet_pool, tfidf)
 
     data_weighted_coeff = compute_weighted_coeff(data_scores, data_weights)
 
+    # assign each period their respective document weighted_coeff
+    for n, quarter in zip(period_lens, data):
+        data[quarter] = data_weighted_coeff[:n]
+        data_weighted_coeff = data_weighted_coeff[n:]
+
     with open(ppj("OUT_DATA", "data_weighted_coeff.pickle"), "wb") as out_file:
-        pickle.dump(data_weighted_coeff, out_file)
-
-
-def create_tfidf_dictionary(x, transformed_file, features):
-    """
-    create dictionary for each input sentence x, where each word has assigned its tfidf score
-
-    inspired  by function from this wonderful article:
-    https://medium.com/analytics-vidhya/automated-keyword-extraction-from-articles
-    -using-nlp-bfd864f41b34
-
-    x - row of dataframe, containing sentences, and their indexes,
-    transformed_file - all sentences transformed with TfidfVectorizer
-    features - names of all words in corpus used in TfidfVectorizer
-    """
-    vector_coo = transformed[x.name].tocoo()
-    vector_coo.col = features.iloc[vector_coo.col].values
-    dict_from_coo = dict(zip(vector_coo.col, vector_coo.data))
-    return dict_from_coo
-
-
-#
-#
-# def replace_tfidf_words(x, transformed_file, features):
-#     """
-#     replacing each word with it's calculated tfidf dictionary with scores of each word
-#     x - row of dataframe, containing sentences, and their indexes,
-#     transformed_file - all sentences transformed with TfidfVectorizer
-#     features - names of all words in corpus used in TfidfVectorizer
-#     """
-#     dictionary = create_tfidf_dictionary(x, transformed_file, features)
+        pickle.dump(data, out_file)

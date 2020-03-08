@@ -6,22 +6,8 @@ from cryptography.fernet import Fernet
 
 from bld.project_paths import project_paths_join as ppj
 
-# Authentication  process
-try:
-    key = getpass("Please enter password to decrypt credentials")
-    key = key.encode("utf-8")
-    key = base64.urlsafe_b64encode(key)
-    cipher_suite = Fernet(key)
-except ValueError:
-    print("Invalid password")
 
-# Use following code to encrypt your credentials
-# pw = yourPassword
-# pw = pw.encode('utf-8')
-# pw = base64.urlsafe_b64encode(pw)
-# cipher_suite = Fernet(pw)
-# cipher_suite.decrypt(yourCredential.decode())    yourCredential as String
-
+get_tweets_flag = ""
 # encrypted credentials
 # you will need to update with your own credentials to access Twitter API
 credentials = {
@@ -39,15 +25,25 @@ credentials = {
 }
 encrypted_credentials = credentials.copy()
 
+# Use following code to encrypt your credentials
+# pw = yourPassword
+# pw = pw.encode('utf-8')
+# pw = base64.urlsafe_b64encode(pw)
+# cipher_suite = Fernet(pw)
+# cipher_suite.decrypt(yourCredential.decode())    yourCredential as String
 
-def decrypt_credentials(cred):
+
+def decrypt_credentials(cred, cipher_suite):
+    """Decrypts stored Twitter Developer credentials.
+    If credentials are not encrypted, returns the stored values.
+    """
     try:
         for c in cred.keys():
             cred[c] = cipher_suite.decrypt(cred[c]).decode()
         print("Credentials decrypted succesfully!")
     except Exception:
         print(
-            "Invalid password. Please try again or update secrets.py with your own credentials."
+            "Wrong password. Please try again or update secrets.py with your own credentials."
         )
         print(
             "Ignore previous error message if your are not storing your credentials encrpyted"
@@ -57,8 +53,22 @@ def decrypt_credentials(cred):
 
 if __name__ == "__main__":
 
-    decrypt_credentials(credentials)
+    try:
+        # Authentication  process
+        key = getpass(
+            "Please enter password to decrypt credentials. Type 'skip' to use stored tweets."
+        )
+
+        if key != "skip":
+            key = key.encode("utf-8")
+            key = base64.urlsafe_b64encode(key)
+            cipher_suite = Fernet(key)
+            decrypt_credentials(credentials, cipher_suite)
+            get_tweets_flag = "True"
+        else:
+            print("Using stored data.")
+    except ValueError:
+        print("Invalid password")
 
     with open(ppj("CREDENTIALS", "credentials.pickle"), "wb") as out_file:
         pickle.dump(credentials, out_file)
-    print("asdf    " + ppj("CREDENTIALS", "credentials.pickle"))

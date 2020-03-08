@@ -1,0 +1,30 @@
+#! python
+
+
+def build(ctx):
+
+# Illustrate simple use of run_py_script
+    ctx(
+        features="run_py_script",
+        source="analysis.py",
+        deps=ctx.path_to(ctx, "OUT_DATA", "data_weighted_coeff.pickle),
+        target=[ctx.path_to(ctx, "OUT_DATA", "sentiment_and_interest_var.xlsx"),
+            ctx.path_to(ctx, "OUT_FIGURES", "GDP_on_fraction.png"),
+            ctx.path_to(ctx, "OUT_FIGURES", "GDP_on_mean.png"),
+            ctx.path_to(ctx, "OUT_FIGURES", "GDP_on_variance.png"),
+            ctx.path_to(ctx, "OUT_ANALYSIS", "GDP_on_sentiment.tex"),
+            ctx.path_to(ctx, "OUT_FIGURES", "UNEMPLOYMENT_on_fraction.png"),
+            ctx.path_to(ctx, "OUT_FIGURES", "UNEMPLOYMENT_on_mean.png"),
+            ctx.path_to(ctx, "OUT_FIGURES", "UNEMPLOYMENT_on_variance.png"),
+            ctx.path_to(ctx, "OUT_ANALYSIS", "UNEMPLOYMENT_on_sentiment.tex"),
+            ctx.path_to(ctx, "OUT_FIGURES", "USDEURO_on_fraction.png"),
+            ctx.path_to(ctx, "OUT_FIGURES", "USDEURO_on_mean.png"),
+            ctx.path_to(ctx, "OUT_FIGURES", "USDEURO_on_variance.png"),
+            ctx.path_to(ctx, "OUT_ANALYSIS", "USDEURO_on_sentiment.tex"),
+            ctx.path_to(ctx, "OUT_FIGURES", "CPI_on_fraction.png"),
+            ctx.path_to(ctx, "OUT_FIGURES", "CPI_on_mean.png"),
+            ctx.path_to(ctx, "OUT_FIGURES", "CPI_on_variance.png"),
+            ctx.path_to(ctx, "OUT_ANALYSIS", "CPI_on_sentiment.tex"),
+            ]
+        name="create_models_using_sentiment_coefficient",
+    )
