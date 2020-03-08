@@ -12,16 +12,13 @@ By Clustering the word2vec Vectors, identify the sentiment of words and assign a
 Get a first report what defines each cluster/sentiment and basic models using the created coefficient. 
 Analyse the regression graphs and tables from the automatic analysis.
 
-## Code Example
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
-
 ## Requirements
-Conda environment in ennvironment.yml
+Conda environment in ennvironment.yml.
 Twitter Developer account and respective credentials if you want to make your own requests.
 
 ## Tests
-Working on MacOS Sierra Version 10.13.6
-Testing data cleaning process (text normalisation). *if you adapt this process to your own requirements, remeber to dissable or update the tests
+Working on MacOS Sierra Version 10.13.6.
+Testing data cleaning process (text normalisation). *if you adapt this process to your own requirements, remeber to dissable or update the tests.
 
 ## How to use?
 First, save your Twitter Developer credentials in secrets.py (and encrypt them).
@@ -33,7 +30,7 @@ Check the automatically created reports and see if you found interesting relatio
 Or to recreate my project just run it in waf.
 
 ## Credits
-Thanks to the internet community for making awesome content available;)
+Thanks to the internet community for making awesome content available;).
 
 #### Anything else that seems useful
 
