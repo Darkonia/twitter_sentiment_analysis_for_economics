@@ -32,7 +32,6 @@ Or to recreate my project just run it in waf.
 ## Credits
 Thanks to the internet community for making awesome content available;).
 
-#### Anything else that seems useful
 
 ## License
 GNU GENERAL PUBLIC LICENSE
