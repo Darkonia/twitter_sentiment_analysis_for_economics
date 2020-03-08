@@ -12,7 +12,9 @@ from bld.project_paths import project_paths_join as ppj
 
 
 def normalise_text(text, stopwords="true", lemmatise="true", stemming="false"):
-
+    """Normalises the text using the selected methods in the parameters.
+    returns a list of sentences, each as a list of words
+    """
     normalised_row = clean_text(text)
 
     if stopwords == "true":
@@ -26,8 +28,9 @@ def normalise_text(text, stopwords="true", lemmatise="true", stemming="false"):
 
 
 def clean_text(text):
-    """ Pre process and convert texts to a list of words
-    method inspired by method from eliorc
+    """ Pre process and convert texts to a list of words.
+    Formats and homogenises the text using regular expressions
+    method nspired by method from eliorc
     github repo: https://github.com/eliorc/Medium/blob/master/MaLSTM.ipynb"""
     text = text.lower()
 
@@ -68,6 +71,8 @@ def clean_text(text):
 
 
 def remove_stopwords(text, language="english"):
+    """removes words with no semantic value
+    """
     stops = set(stopwords.words(language))
     without_stopwords = [x for x in text if x not in stops]
     return without_stopwords
@@ -78,6 +83,8 @@ stops = set(stopwords.words("english"))
 
 # define methods stem and lemmatize for a list of words
 def lemmatize(text):
+    """reduce words using the semantic root
+    """
     lmtzd_text = []
     lmtzr = WordNetLemmatizer()
     for word in text:
@@ -87,7 +94,7 @@ def lemmatize(text):
 
 
 def get_wordnet_pos(word):
-    """Map POS tag to first character lemmatize() accepts"""
+    """map POS tag to first character lemmatize() accepts"""
     tag = nltk.pos_tag([word])[0][1][0].upper()
     tag_dict = {
         "J": wordnet.ADJ,
@@ -100,6 +107,8 @@ def get_wordnet_pos(word):
 
 
 def stem(text):
+    """reduce words to the smallest root. Roots do not necessarily have a meaning
+    """
     stemd_text = []
     porter = PorterStemmer()
     for word in text:
@@ -136,6 +145,8 @@ def identify_quarter(date):
 
 
 def assign_quarter(tweet):
+    """idetify tweet's date and assign respective quarter, example: 2020-03-08 -> 2020Q1
+    """
     date = reformat_date(tweet)
     qu = identify_quarter(date)
     tweet["quarter"] = date[:4] + qu

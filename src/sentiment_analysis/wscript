@@ -12,5 +12,3 @@ def build(ctx):
             ctx.path_to(ctx, "OUT_ANALYSIS", "clusters_report.txt")],
         name="create_sentiment_coefficients",
     )
-a = 'asdf'
-a*8

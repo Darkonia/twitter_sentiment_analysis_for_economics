@@ -10,11 +10,12 @@ Welcome to the Example project's documentation!
 .. toctree::
     :maxdepth: 2
 
+
     introduction
+    credentials
+    get_tweets
     original_data
     data_management
     analysis
-    final
-    paper
 
     references
