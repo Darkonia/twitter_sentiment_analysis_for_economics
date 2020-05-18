@@ -13,7 +13,7 @@ Get a first report what defines each cluster/sentiment and basic models using th
 Analyse the regression graphs and tables from the automatic analysis.
 
 ## Requirements
-Conda environment in ennvironment.yml.
+Conda environment in environment.yml.
 Twitter Developer account and respective credentials if you want to make your own requests.
 
 ## Tests
